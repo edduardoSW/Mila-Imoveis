@@ -9,10 +9,15 @@
     <link rel="icon" href="assets/logo-mila.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="assets/images/AP0998-1.jpg" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div class="site-loader" id="site-loader" aria-hidden="true">
+      <img src="assets/logo-mila.png" alt="" width="1656" height="950">
+    </div>
+
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
     <header class="site-header" id="topo">
@@ -52,7 +57,7 @@
     </header>
 
     <main id="conteudo" tabindex="-1">
-      <div id="app" aria-live="polite"></div>
+      <div id="app" aria-live="polite" aria-busy="true"></div>
     </main>
 
     <footer class="site-footer" id="contato">

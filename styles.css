@@ -55,6 +55,29 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .skip-link:focus { transform: translateY(0); }
 
+.site-loader {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .32s ease, visibility 0s linear .32s;
+}
+
+.site-loader img {
+  width: clamp(150px, 20vw, 230px);
+  height: auto;
+}
+
+.site-loader.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .site-header {
   position: fixed;
   z-index: 100;
@@ -221,23 +244,40 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .hero {
   position: relative;
+  isolation: isolate;
+  height: 100vh;
+  height: max(650px, 100svh);
   min-height: 650px;
-  height: 100svh;
   overflow: hidden;
-  background: #321723 url("assets/images/AP0998-1.jpg") center / cover no-repeat;
+  background: #321723;
   color: white;
 }
 
+.hero-media,
 .hero-video,
+.hero-cover,
 .hero-overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-video { object-fit: cover; object-position: 62% center; }
+.hero-media { z-index: 0; overflow: hidden; contain: paint; }
+.hero-cover,
+.hero-video {
+  max-width: none;
+  object-fit: cover;
+  object-position: 62% center;
+  transition: opacity .45s ease;
+}
+.hero-cover { z-index: 0; opacity: 1; }
+.hero-video { z-index: 1; opacity: 0; }
+.hero.is-video-ready .hero-cover { opacity: 0; }
+.hero.is-video-ready .hero-video { opacity: 1; }
 .hero-overlay {
+  z-index: 2;
   background: linear-gradient(90deg, rgba(24, 9, 16, .82) 0%, rgba(32, 12, 21, .48) 52%, rgba(15, 5, 10, .18) 100%);
+  pointer-events: none;
 }
 
 .hero-inner {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: var(--container);
   height: 100%;
   margin: auto;
@@ -271,7 +311,7 @@ h1, h2, h3 {
 
 .video-toggle {
   position: absolute;
-  z-index: 3;
+  z-index: 4;
   right: 28px;
   bottom: 86px;
   display: flex;
@@ -283,8 +323,12 @@ h1, h2, h3 {
   background: rgba(20, 8, 14, .42);
   color: white;
   font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
   backdrop-filter: blur(8px);
+  transition: opacity .2s ease, background .2s ease;
 }
+.hero.is-video-ready .video-toggle { opacity: 1; pointer-events: auto; }
 
 .search-panel {
   width: 100%;
@@ -893,8 +937,8 @@ input::placeholder { color: #a0959b; }
   .brand { width: 116px; height: 58px; }
   .header-service { display: none; }
   .mobile-menu { padding-inline: max(20px, env(safe-area-inset-left)); }
-  .hero { min-height: 640px; height: 100svh; }
-  .hero-video { object-position: 44% center; }
+  .hero { height: max(640px, 100svh); min-height: 640px; }
+  .hero-cover, .hero-video { object-position: 44% center; }
   .hero-overlay { background: linear-gradient(0deg, rgba(22,8,14,.85) 0%, rgba(28,10,18,.46) 80%); }
   .hero-inner { height: 100%; min-height: 0; padding: 92px 0 20px; justify-content: center; }
   .hero-copy { margin-bottom: 18px; }
@@ -976,7 +1020,7 @@ input::placeholder { color: #a0959b; }
 
 @media (max-width: 430px) {
   .icon-button { width: 39px; height: 39px; }
-  .hero { min-height: 620px; }
+  .hero { height: max(620px, 100svh); min-height: 620px; }
   .hero h1 { font-size: 34px; }
   .search-fields { grid-template-columns: 1fr 1fr; gap: 8px; }
   .search-fields label:nth-child(2) { grid-column: 1 / -1; grid-row: 1; }
@@ -1012,8 +1056,8 @@ input::placeholder { color: #a0959b; }
   .brand { width: 104px; }
   .header-inner { gap: 12px; }
   .header-actions { gap: 7px; }
-  .hero { height: auto; min-height: 100svh; overflow: visible; }
-  .hero-inner { height: auto; min-height: 700px; padding-bottom: 28px; }
+  .hero { height: max(740px, 100svh); min-height: 740px; overflow: hidden; }
+  .hero-inner { height: 100%; min-height: 0; padding-bottom: 28px; }
   .hero h1 { font-size: 31px; }
   .search-fields { grid-template-columns: 1fr; }
   .search-fields label:nth-child(2), .search-fields .button { grid-column: auto; }
@@ -1026,8 +1070,8 @@ input::placeholder { color: #a0959b; }
 }
 
 @media (max-height: 650px) and (max-width: 760px) {
-  .hero { height: auto; min-height: 640px; overflow: visible; }
-  .hero-inner { height: auto; min-height: 640px; padding-top: calc(var(--header-height) + 24px); }
+  .hero { height: 680px; min-height: 680px; overflow: hidden; }
+  .hero-inner { height: 100%; min-height: 0; padding-top: calc(var(--header-height) + 24px); }
 }
 
 @media (orientation: landscape) and (max-height: 500px) {

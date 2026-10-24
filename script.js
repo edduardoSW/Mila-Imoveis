@@ -314,9 +314,12 @@ function propertyCard(property) {
 function homeTemplateLegacy() {
   return `
     <section class="hero" aria-labelledby="hero-title">
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/AP0998-1.jpg" aria-hidden="true">
-        <source src="assets/apartamento-hero.mp4" type="video/mp4">
-      </video>
+      <div class="hero-media" aria-hidden="true">
+        <img class="hero-cover" src="assets/images/AP0998-1.jpg" alt="" width="1280" height="746" fetchpriority="high">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/AP0998-1.jpg">
+          <source src="assets/apartamento-hero.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="hero-overlay"></div>
       <div class="hero-inner">
         <div class="hero-copy">
@@ -449,7 +452,10 @@ function homeTemplate() {
   ];
   return `
     <section class="hero" aria-labelledby="hero-title">
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/AP0998-1.jpg" aria-hidden="true"><source src="assets/apartamento-hero.mp4" type="video/mp4"></video>
+      <div class="hero-media" aria-hidden="true">
+        <img class="hero-cover" src="assets/images/AP0998-1.jpg" alt="" width="1280" height="746" fetchpriority="high">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/AP0998-1.jpg"><source src="assets/apartamento-hero.mp4" type="video/mp4"></video>
+      </div>
       <div class="hero-overlay"></div>
       <div class="hero-inner">
         <div class="hero-copy"><h1 id="hero-title">Encontre um lugar para viver a sua próxima história.</h1><p>Compra, locação e lançamentos na Grande Vitória, com busca clara e atendimento direto da equipe Mila.</p></div>
@@ -469,6 +475,7 @@ function homeTemplate() {
           <div class="search-panel-footer"><button class="search-more" type="button" data-open-filters>+ Mais filtros</button><a href="#resultados?codigo=AP">Buscar por código</a></div>
         </form>
       </div>
+      <button class="video-toggle" type="button" aria-label="Pausar vídeo"><span aria-hidden="true">Ⅱ</span> Pausar vídeo</button>
     </section>
 
     <nav class="portal-shortcuts" aria-label="Atalhos do portal"><div class="container">
@@ -877,13 +884,58 @@ function enhanceSelects(root = document) {
 function setupHeroVideo() {
   const video = document.querySelector(".hero-video");
   if (!video) return;
+  const hero = video.closest(".hero");
+  const toggle = hero?.querySelector(".video-toggle");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const showVideo = () => {
+    if (!video.isConnected || video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA || video.paused) return;
+    hero.classList.add("is-video-ready");
+    if (toggle) {
+      toggle.disabled = false;
+      toggle.setAttribute("aria-label", "Pausar vídeo");
+      toggle.innerHTML = '<span aria-hidden="true">Ⅱ</span> Pausar vídeo';
+    }
+  };
+
+  const keepCover = () => {
+    hero.classList.remove("is-video-ready");
+    hero.classList.add("is-video-unavailable");
+    if (toggle) toggle.disabled = true;
+  };
+
+  video.addEventListener("playing", showVideo);
+  video.addEventListener("error", keepCover, { once: true });
+
+  toggle?.addEventListener("click", () => {
+    if (video.paused) {
+      video.play().catch(keepCover);
+    } else {
+      video.pause();
+      toggle.setAttribute("aria-label", "Reproduzir vídeo");
+      toggle.innerHTML = '<span aria-hidden="true">▶</span> Reproduzir vídeo';
+    }
+  });
+
   if (reduceMotion) {
     video.pause();
     video.removeAttribute("autoplay");
+    if (toggle) toggle.hidden = true;
   } else {
-    video.play().catch(() => {});
+    video.play().then(showVideo).catch(keepCover);
   }
+}
+
+function dismissInitialLoader() {
+  const loader = document.querySelector("#site-loader");
+  app.setAttribute("aria-busy", "false");
+  if (!loader) return;
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    loader.classList.add("is-leaving");
+    loader.addEventListener("transitionend", () => loader.remove(), { once: true });
+    window.setTimeout(() => loader.remove(), 500);
+  }));
 }
 
 function setupShortcutReveal() {
@@ -1242,3 +1294,4 @@ window.addEventListener("hashchange", () => {
 document.querySelector("#current-year").textContent = new Date().getFullYear();
 
 route();
+dismissInitialLoader();
