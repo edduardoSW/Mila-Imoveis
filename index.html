@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#7a123f">
+    <meta name="description" content="Mila Imóveis — imóveis para comprar e alugar na Grande Vitória.">
+    <title>Mila Imóveis | Seu próximo lar começa aqui</title>
+    <link rel="icon" href="assets/logo-mila.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="site-header" id="topo">
+      <div class="header-inner">
+        <a class="brand" href="#inicio" aria-label="Mila Imóveis — início">
+          <img src="assets/logo-mila.png" alt="Mila Imóveis">
+        </a>
+
+        <nav class="desktop-nav" aria-label="Navegação principal">
+          <a href="#resultados?finalidade=comprar">Comprar</a>
+          <a href="#resultados?finalidade=alugar">Alugar</a>
+          <a href="#resultados?finalidade=novos">Lançamentos</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#fale-conosco">Contato</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="icon-button favorites-button" type="button" aria-label="Ver imóveis favoritos" title="Favoritos">
+            <span aria-hidden="true">♡</span>
+            <span class="favorite-count" aria-label="0 favoritos">0</span>
+          </button>
+          <a class="button button-primary header-service" href="https://wa.me/5527995014999?text=Olá%2C%20gostaria%20de%20atendimento." target="_blank" rel="noopener">Atendimento</a>
+          <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="mobile-menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Navegação móvel" hidden>
+        <a href="#resultados?finalidade=comprar">Comprar</a>
+        <a href="#resultados?finalidade=alugar">Alugar</a>
+        <a href="#resultados?finalidade=novos">Lançamentos</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#cadastre-imovel">Cadastre seu imóvel</a>
+        <a href="#fale-conosco">Contato</a>
+      </nav>
+    </header>
+
+    <main id="conteudo" tabindex="-1">
+      <div id="app" aria-live="polite"></div>
+    </main>
+
+    <footer class="site-footer" id="contato">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logo-mila.png" alt="Mila Imóveis">
+          <p>Mila Imóveis Ltda. Compra, locação, lançamentos e serviços imobiliários no Espírito Santo.</p>
+          <span class="creci">CRECI 9997-J</span>
+        </div>
+        <div>
+          <h2>Imóveis</h2>
+          <a href="#resultados?finalidade=comprar">Comprar</a>
+          <a href="#resultados?finalidade=alugar">Alugar</a>
+          <a href="#resultados?finalidade=novos">Lançamentos</a>
+          <a href="#favoritos">Favoritos</a>
+        </div>
+        <div>
+          <h2>Serviços</h2>
+          <a href="#cadastre-imovel">Cadastre seu imóvel</a>
+          <a href="#encomende-imovel">Imóvel sob encomenda</a>
+          <a href="#financiamento">Financiamento e bancos</a>
+          <a href="https://www.milaimoveis.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de privacidade</a>
+        </div>
+        <div>
+          <h2>Fale com a Mila</h2>
+          <a href="tel:+552730454999">(27) 3045-4999</a>
+          <a href="https://wa.me/5527995014999" target="_blank" rel="noopener">(27) 99501-4999</a>
+          <a href="mailto:aluguel@milaimoveis.com.br">aluguel@milaimoveis.com.br</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Rua%20Carlos%20Eduardo%20Monteiro%20de%20Lemos%20135%20Jardim%20da%20Penha%20Vit%C3%B3ria%20ES" target="_blank" rel="noopener"><address>Rua Carlos Eduardo Monteiro de Lemos, 135 — Loja 04<br>Jardim da Penha, Vitória/ES</address></a>
+          <a href="https://pt-br.facebook.com/pages/category/Real-Estate-Agent/Mila-Im%C3%B3veis-LTDA-346513502070565/" target="_blank" rel="noopener">Facebook ↗</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="current-year"></span> Mila Imóveis Ltda.</p>
+        <p>Seleção de anúncios do catálogo público. Disponibilidade e valores devem ser confirmados.</p>
+      </div>
+    </footer>
+
+    <a class="whatsapp-float" href="https://wa.me/5527995014999?text=Olá%2C%20vim%20pelo%20site%20da%20Mila%20Imóveis." target="_blank" rel="noopener" aria-label="Falar com a Mila Imóveis pelo WhatsApp">
+      <span aria-hidden="true">↗</span><span>WhatsApp</span>
+    </a>
+
+    <dialog class="modal" id="filters-dialog" aria-labelledby="filters-title">
+      <form method="dialog" class="modal-card" id="advanced-filter-form">
+        <div class="modal-heading">
+          <div>
+            <span class="eyebrow">Refine sua busca</span>
+            <h2 id="filters-title">Mais filtros</h2>
+          </div>
+          <button class="close-button" value="cancel" aria-label="Fechar filtros">×</button>
+        </div>
+        <div class="advanced-grid">
+          <label>Quartos mínimos<select name="quartos"><option value="">Qualquer</option><option>1</option><option>2</option><option>3</option><option>4</option><option value="5">5+</option></select></label>
+          <label>Suítes mínimas<select name="suites"><option value="">Qualquer</option><option>1</option><option>2</option><option>3</option><option>4</option><option value="5">5+</option></select></label>
+          <label>Vagas mínimas<select name="vagas"><option value="">Qualquer</option><option>1</option><option>2</option><option>3</option><option>4</option><option value="5">5+</option></select></label>
+          <label>Banheiros mínimos<select name="banheiros"><option value="">Qualquer</option><option>1</option><option>2</option><option>3</option><option>4</option><option value="5">5+</option></select></label>
+          <label>Área mínima (m²)<input name="areaMin" type="number" min="0" inputmode="numeric" placeholder="Ex.: 70"></label>
+          <label>Código do imóvel<input name="codigo" type="search" placeholder="Ex.: AP0998"></label>
+        </div>
+        <fieldset class="feature-options">
+          <legend>Características</legend>
+          <label><input type="checkbox" name="caracteristicas" value="varanda"> Varanda</label>
+          <label><input type="checkbox" name="caracteristicas" value="elevador"> Elevador</label>
+          <label><input type="checkbox" name="caracteristicas" value="piscina"> Piscina</label>
+          <label><input type="checkbox" name="caracteristicas" value="aceita pet"> Aceita pet</label>
+          <label><input type="checkbox" name="caracteristicas" value="churrasqueira"> Churrasqueira</label>
+          <label><input type="checkbox" name="caracteristicas" value="ar condicionado"> Ar-condicionado</label>
+        </fieldset>
+        <div class="modal-actions">
+          <button class="button button-ghost" type="reset">Limpar</button>
+          <button class="button button-primary" value="default" type="submit">Aplicar filtros</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="modal gallery-modal" id="gallery-dialog" aria-label="Galeria do imóvel">
+      <div class="gallery-shell">
+        <button class="close-button gallery-close" type="button" aria-label="Fechar galeria">×</button>
+        <button class="gallery-arrow gallery-prev" type="button" aria-label="Foto anterior">‹</button>
+        <figure>
+          <img id="gallery-image" src="" alt="">
+          <figcaption id="gallery-caption"></figcaption>
+        </figure>
+        <button class="gallery-arrow gallery-next" type="button" aria-label="Próxima foto">›</button>
+      </div>
+    </dialog>
+
+    <dialog class="modal" id="lead-dialog" aria-labelledby="lead-title">
+      <form method="dialog" class="modal-card lead-form" id="lead-form" novalidate>
+        <div class="modal-heading">
+          <div>
+            <span class="eyebrow">Atendimento personalizado</span>
+            <h2 id="lead-title">Vamos conversar?</h2>
+            <p id="lead-context">Conte como podemos ajudar.</p>
+          </div>
+          <button class="close-button" value="cancel" aria-label="Fechar formulário">×</button>
+        </div>
+        <input type="hidden" name="imovel" id="lead-property">
+        <label>Nome completo<input name="nome" autocomplete="name" required minlength="3"></label>
+        <label>Telefone<input name="telefone" type="tel" autocomplete="tel" required placeholder="(27) 99999-9999"></label>
+        <label>E-mail<input name="email" type="email" autocomplete="email" placeholder="voce@email.com"></label>
+        <label>Mensagem<textarea name="mensagem" rows="4" required></textarea></label>
+        <label class="consent"><input type="checkbox" name="consentimento" required> Concordo em ser contatado sobre esta solicitação.</label>
+        <p class="form-status" role="status"></p>
+        <div class="modal-actions">
+          <button class="button button-primary" type="submit" value="default">Continuar no WhatsApp</button>
+        </div>
+        <p class="integration-note">O protótipo não envia dados para um CRM. Ao continuar, sua mensagem será aberta no canal oficial do WhatsApp para você confirmar o envio.</p>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
