@@ -311,134 +311,6 @@ function propertyCard(property) {
     </article>`;
 }
 
-function homeTemplateLegacy() {
-  return `
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-media" aria-hidden="true">
-        <img class="hero-cover" src="assets/images/AP0998-1.jpg" alt="" width="1280" height="746" fetchpriority="high">
-        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/AP0998-1.jpg">
-          <source src="assets/apartamento-hero.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="hero-overlay"></div>
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <span class="eyebrow">Mila Imóveis · Grande Vitória</span>
-          <h1 id="hero-title">Seu próximo lar começa aqui.</h1>
-          <p>Encontre o imóvel que combina com você na Grande Vitória.</p>
-        </div>
-        <form class="search-panel" id="hero-search">
-          <div class="purpose-tabs" role="tablist" aria-label="Finalidade">
-            <button class="purpose-tab active" type="button" role="tab" aria-selected="true" data-purpose="comprar">Comprar</button>
-            <button class="purpose-tab" type="button" role="tab" aria-selected="false" data-purpose="alugar">Alugar</button>
-          </div>
-          <input type="hidden" name="finalidade" value="comprar">
-          <div class="search-fields">
-            <label>Tipo de imóvel
-              <select name="tipo"><option value="">Todos os tipos</option><option value="Apartamento">Apartamento</option></select>
-            </label>
-            <label>Cidade ou bairro
-              <input name="local" type="search" placeholder="Ex.: Jardim Camburi">
-            </label>
-            <label>Faixa de preço
-              <select name="preco"><option value="">Qualquer valor</option><option value="800000">Até R$ 800 mil</option><option value="1800000">Até R$ 1,8 milhão</option><option value="3000000">Até R$ 3 milhões</option></select>
-            </label>
-            <button class="button button-primary" type="submit">Buscar imóveis →</button>
-          </div>
-          <button class="search-more" type="button" data-open-filters>+ Mais filtros</button>
-        </form>
-      </div>
-      <button class="video-toggle" type="button" aria-label="Pausar vídeo"><span aria-hidden="true">Ⅱ</span> Pausar vídeo</button>
-    </section>
-
-    <section class="section" id="destaques">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">Seleção Mila</span>
-            <h2>Imóveis em destaque</h2>
-            <p>Uma curadoria atual de imóveis para comprar e alugar em Vitória.</p>
-          </div>
-          <a class="button button-ghost" href="#resultados">Ver todos os imóveis</a>
-        </div>
-        <div class="property-grid">${properties.slice(0, 6).map(propertyCard).join("")}</div>
-      </div>
-    </section>
-
-    <section class="section section-soft" id="lancamentos">
-      <div class="container">
-        <div class="launch-card">
-          <div class="launch-image"><img src="assets/images/AP0998-1.jpg" alt="Interior do Vivere Residenziale" loading="lazy"></div>
-          <div class="launch-copy">
-            <span class="eyebrow">Lançamento cadastrado</span>
-            <h2>Vivere Residenziale</h2>
-            <p>Conforto, tecnologia e lazer no coração do Barro Vermelho, com plantas de 93,38 m² a 155,63 m².</p>
-            <ul class="launch-list"><li>Piscina com sauna</li><li>Espaço kids</li><li>Mini quadra</li><li>Espaço pet</li></ul>
-            <a class="button button-light" href="#imovel/AP0998">Conhecer o empreendimento</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="regioes">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">Viva do seu jeito</span>
-            <h2>Explore por região</h2>
-            <p>Comece pelo bairro e descubra endereços que combinam com a sua rotina.</p>
-          </div>
-        </div>
-        <div class="region-grid">
-          ${regions.map(region => `<a class="region-card" href="#resultados?local=${encodeURIComponent(region.name)}"><img src="${region.image}" alt="Imóveis em ${region.name}" loading="lazy"><span class="region-label"><span>Explore imóveis em</span><strong>${region.name}</strong></span></a>`).join("")}
-        </div>
-      </div>
-    </section>
-
-    <section class="owner-section" id="anuncie">
-      <div class="container">
-        <div class="owner-card">
-          <div>
-            <span class="eyebrow">Para proprietários</span>
-            <h2>Seu imóvel em boas mãos.</h2>
-            <p>Conte com a Mila para apresentar seu imóvel com cuidado e encontrar o negócio certo.</p>
-            <button class="button button-primary" type="button" data-lead="anunciar">Quero anunciar meu imóvel</button>
-          </div>
-          <div class="owner-steps">
-            <div class="owner-step"><strong>Conte sobre o imóvel</strong><p>Envie as informações iniciais pelo canal oficial.</p></div>
-            <div class="owner-step"><strong>Receba uma avaliação</strong><p>A equipe entra em contato para entender todos os detalhes.</p></div>
-            <div class="owner-step"><strong>Comece a anunciar</strong><p>Após a confirmação, o imóvel segue para divulgação.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-soft" id="sob-medida">
-      <div class="container request-layout">
-        <div class="request-copy">
-          <span class="eyebrow">Busca personalizada</span>
-          <h2>Não encontrou? A gente procura com você.</h2>
-          <p>Conte o que importa no seu próximo imóvel e leve suas preferências direto para a equipe Mila.</p>
-        </div>
-        <form class="request-form" id="request-form" novalidate>
-          <label>Nome<input name="nome" required minlength="3" autocomplete="name"></label>
-          <label>Telefone<input name="telefone" required type="tel" autocomplete="tel" placeholder="(27) 99999-9999"></label>
-          <label>Finalidade<select name="finalidade"><option>Comprar</option><option>Alugar</option></select></label>
-          <label>Região de interesse<input name="regiao" placeholder="Bairro ou cidade"></label>
-          <label class="full">O que você procura?<textarea name="preferencias" rows="3" required placeholder="Ex.: 3 quartos, varanda, até R$ 1 milhão"></textarea></label>
-          <div class="full"><button class="button button-primary" type="submit">Solicitar atendimento</button><p class="integration-note">A mensagem será aberta no WhatsApp oficial para você confirmar o envio.</p></div>
-        </form>
-      </div>
-    </section>
-
-    <section class="finance-strip">
-      <div class="container finance-inner">
-        <div><span class="eyebrow">Planeje sua compra</span><h2>Financiamento imobiliário</h2><p>Veja os canais e bancos indicados pela Mila, sem simulações ou promessas de aprovação.</p></div>
-        <a class="button button-light" href="https://www.milaimoveis.com.br/financiamento-e-bancos" target="_blank" rel="noopener">Consultar serviço oficial ↗</a>
-      </div>
-    </section>`;
-}
-
 function homeTemplate() {
   const highlights = properties.filter(property => !property.launch).slice(0, 6);
   const launches = properties.filter(property => property.launch);
@@ -453,8 +325,8 @@ function homeTemplate() {
   return `
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-media" aria-hidden="true">
-        <img class="hero-cover" src="assets/images/AP0998-1.jpg" alt="" width="1280" height="746" fetchpriority="high">
-        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/AP0998-1.jpg"><source src="assets/apartamento-hero.mp4" type="video/mp4"></video>
+        <img class="hero-cover" src="assets/apartamento-hero-cover.jpg?v=20261024" alt="" width="1920" height="1080" fetchpriority="high" decoding="sync">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/apartamento-hero-cover.jpg?v=20261024" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"><source src="assets/apartamento-hero.mp4?v=20261024" type="video/mp4"></video>
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-inner">
@@ -475,7 +347,6 @@ function homeTemplate() {
           <div class="search-panel-footer"><button class="search-more" type="button" data-open-filters>+ Mais filtros</button><a href="#resultados?codigo=AP">Buscar por código</a></div>
         </form>
       </div>
-      <button class="video-toggle" type="button" aria-label="Pausar vídeo"><span aria-hidden="true">Ⅱ</span> Pausar vídeo</button>
     </section>
 
     <nav class="portal-shortcuts" aria-label="Atalhos do portal"><div class="container">
@@ -885,57 +756,28 @@ function setupHeroVideo() {
   const video = document.querySelector(".hero-video");
   if (!video) return;
   const hero = video.closest(".hero");
-  const toggle = hero?.querySelector(".video-toggle");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const showVideo = () => {
     if (!video.isConnected || video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA || video.paused) return;
     hero.classList.add("is-video-ready");
-    if (toggle) {
-      toggle.disabled = false;
-      toggle.setAttribute("aria-label", "Pausar vídeo");
-      toggle.innerHTML = '<span aria-hidden="true">Ⅱ</span> Pausar vídeo';
-    }
   };
 
   const keepCover = () => {
     hero.classList.remove("is-video-ready");
     hero.classList.add("is-video-unavailable");
-    if (toggle) toggle.disabled = true;
   };
 
   video.addEventListener("playing", showVideo);
+  video.addEventListener("loadeddata", showVideo);
   video.addEventListener("error", keepCover, { once: true });
-
-  toggle?.addEventListener("click", () => {
-    if (video.paused) {
-      video.play().catch(keepCover);
-    } else {
-      video.pause();
-      toggle.setAttribute("aria-label", "Reproduzir vídeo");
-      toggle.innerHTML = '<span aria-hidden="true">▶</span> Reproduzir vídeo';
-    }
-  });
 
   if (reduceMotion) {
     video.pause();
     video.removeAttribute("autoplay");
-    if (toggle) toggle.hidden = true;
   } else {
     video.play().then(showVideo).catch(keepCover);
   }
-}
-
-function dismissInitialLoader() {
-  const loader = document.querySelector("#site-loader");
-  app.setAttribute("aria-busy", "false");
-  if (!loader) return;
-
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    loader.classList.add("is-leaving");
-    loader.addEventListener("transitionend", () => loader.remove(), { once: true });
-    window.setTimeout(() => loader.remove(), 500);
-  }));
 }
 
 function setupShortcutReveal() {
@@ -1294,4 +1136,3 @@ window.addEventListener("hashchange", () => {
 document.querySelector("#current-year").textContent = new Date().getFullYear();
 
 route();
-dismissInitialLoader();

@@ -9,15 +9,11 @@
     <link rel="icon" href="assets/logo-mila.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="image" href="assets/images/AP0998-1.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/apartamento-hero-cover.jpg?v=20261024" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20261024-direct-open">
   </head>
   <body>
-    <div class="site-loader" id="site-loader" aria-hidden="true">
-      <img src="assets/logo-mila.png" alt="" width="1656" height="950">
-    </div>
-
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
     <header class="site-header" id="topo">
@@ -57,7 +53,36 @@
     </header>
 
     <main id="conteudo" tabindex="-1">
-      <div id="app" aria-live="polite" aria-busy="true"></div>
+      <div id="app" aria-live="polite">
+        <!-- Rendered in HTML so cover, title and search are available before JavaScript starts. -->
+        <section class="hero hero-initial" aria-labelledby="hero-title">
+          <div class="hero-media" aria-hidden="true">
+            <img class="hero-cover" src="assets/apartamento-hero-cover.jpg?v=20261024" alt="" width="1920" height="1080" fetchpriority="high" decoding="sync">
+            <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/apartamento-hero-cover.jpg?v=20261024" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback">
+              <source src="assets/apartamento-hero.mp4?v=20261024" type="video/mp4">
+            </video>
+          </div>
+          <div class="hero-overlay"></div>
+          <div class="hero-inner">
+            <div class="hero-copy"><h1 id="hero-title">Encontre um lugar para viver a sua próxima história.</h1><p>Compra, locação e lançamentos na Grande Vitória, com busca clara e atendimento direto da equipe Mila.</p></div>
+            <form class="search-panel" id="hero-search">
+              <div class="purpose-tabs" role="tablist" aria-label="Finalidade">
+                <button class="purpose-tab active" type="button" role="tab" aria-selected="true" data-purpose="comprar">Comprar</button>
+                <button class="purpose-tab" type="button" role="tab" aria-selected="false" data-purpose="alugar">Alugar</button>
+                <button class="purpose-tab" type="button" role="tab" aria-selected="false" data-purpose="novos">Novos</button>
+              </div>
+              <input type="hidden" name="finalidade" value="comprar">
+              <div class="search-fields">
+                <label>Tipo de imóvel<select name="tipo"><option value="">Todos os tipos</option><option>Apartamento</option><option>Apartamento garden</option><option>Casa</option><option>Cobertura</option><option>Loja</option><option>Sala</option><option>Studio</option><option>Terreno</option><option>Sítio</option><option>Andar corporativo</option></select></label>
+                <label>Cidade, bairro ou condomínio<input name="local" type="search" placeholder="Ex.: Jardim da Penha"></label>
+                <label>Faixa de preço<select name="preco"><option value="">Qualquer valor</option><option value="600000">Até R$ 600 mil</option><option value="1000000">Até R$ 1 milhão</option><option value="2000000">Até R$ 2 milhões</option><option value="3000000">Até R$ 3 milhões</option></select></label>
+                <button class="button button-primary" type="submit">Buscar imóveis →</button>
+              </div>
+              <div class="search-panel-footer"><button class="search-more" type="button" data-open-filters>+ Mais filtros</button><a href="#resultados?codigo=AP">Buscar por código</a></div>
+            </form>
+          </div>
+        </section>
+      </div>
     </main>
 
     <footer class="site-footer" id="contato">
@@ -169,6 +194,6 @@
       </form>
     </dialog>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20261024-direct-open"></script>
   </body>
 </html>
