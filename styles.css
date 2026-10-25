@@ -732,8 +732,13 @@ input::placeholder { color: #a0959b; }
 .contact-band h2 { max-width: 720px; margin-bottom: 15px; font-size: clamp(35px, 5vw, 58px); }
 .contact-band p { margin-bottom: 8px; color: rgba(255,255,255,.75); }
 .contact-band .pending-info { color: rgba(255,255,255,.55); font-size: 12px; }
+.contact-side { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: 14px; align-items: stretch; }
 .contact-actions { display: grid; gap: 11px; }
 .contact-actions span { text-align: center; color: rgba(255,255,255,.65); font-size: 12px; }
+.contact-map-card { min-width: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.17); border-radius: 18px; background: rgba(255,255,255,.08); }
+.contact-map-card iframe { display: block; width: 100%; height: 128px; border: 0; }
+.contact-map-card > a { min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 7px 10px; color: white; font-size: 12px; font-weight: 700; text-align: center; }
+.contact-map-card > a:hover { background: rgba(255,255,255,.1); }
 
 .monthly-total { display: block; margin: -7px 0 16px; color: var(--success); font-size: 11px; }
 .detail-aside .monthly-total { margin: -14px 0 20px; padding: 10px 12px; border-radius: 10px; background: #edf8f3; }
@@ -922,6 +927,7 @@ input::placeholder { color: #a0959b; }
   .location-popular .location-list { grid-template-columns: 1fr; }
   .location-group { padding: 22px 20px; }
   .contact-actions { max-width: 420px; }
+  .contact-side { max-width: 680px; }
   .launch-card, .owner-card, .request-layout { grid-template-columns: 1fr; }
   .launch-image { min-height: 320px; }
   .owner-card { gap: 38px; padding: 36px 25px; }
@@ -971,6 +977,12 @@ input::placeholder { color: #a0959b; }
   .mobile-filter-button { display: inline-flex; }
   .detail-layout { grid-template-columns: 1fr; padding-top: 42px; }
   .detail-aside { position: static; grid-row: 1; }
+}
+
+@media (max-width: 560px) {
+  .contact-side { grid-template-columns: 1fr; }
+  .contact-actions { max-width: none; }
+  .contact-map-card iframe { height: 180px; }
 }
 
 @media (max-width: 430px) {
